@@ -18,6 +18,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductServiceController;
 use App\Models\Product;
 
 Route::view('/login', 'login')->middleware('guest')->name('auth.login');
@@ -72,6 +73,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{category_id}/products', [CategoryController::class, 'products'])->name('category.products');
     });
 
+    Route::group(['prefix' => 'service'], function () {
+        Route::get('/{category_id}/{product_id}', [ProductServiceController::class, 'index'])->name('services');
+        Route::post('/', [ProductServiceController::class, 'store'])->name('services.store');
+        Route::get('/create/{category_id}/{product_id}', [ProductServiceController::class, 'create'])->name('services.create');
+        Route::get('/remove/{product_id}', [ProductServiceController::class, 'remove'])->name('services.remove');
+    });
+
 });
 
 
@@ -79,7 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('clr', function() { session()->flush(); });
 Route::get('cart', function() {
     $carts = session()->get('cart');
-    dd($carts);
+    session()->forget('success');
 });
 
 // AJAX Request

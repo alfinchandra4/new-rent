@@ -12,7 +12,32 @@
     <span>{{ $category->cat_name }}</span>
 @endsection
 
+
 @section('content')
+<div class="row">
+    @foreach ($products as $item)
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="myChart{{$item->id}}" width="200" height="200"></canvas>
+                    <center class="font-weight-bold">
+                        800 of 1000 Jam
+                    </center>
+                </div>
+                <a href="{{ route('services', [1, 1]) }}">
+                    <div class="card-footer bg-secondary font-weight-lighter">
+                        <center>
+                            {{ $item->product_name }}
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        </center>
+                    </div>
+                </a>
+            </div>
+        </div>
+    @endforeach
+</div>
+
+
     <div class="card">
         <div class="card-body">
             <h4>Kategori</h4>
@@ -83,4 +108,33 @@
             </table>
         </div>
     </div>
+@endsection
+
+@section('js-bottom')
+    <script>
+        var ctx = document.getElementById("myChart1");
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Total jam kerja"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [1200, 0],
+                    backgroundColor: [
+                        'rgba(159, 90, 253, 1)',
+                        '#fff'
+                    ],
+                }]
+
+            },
+            options: {
+                rotation: 1 * Math.PI,/** This is where you need to work out where 89% is */
+                circumference: 1 * Math.PI,/** put in a much smaller amount  so it does not take up an entire semi circle */
+                tooltip: {
+                    enabled: false
+                },
+                cutoutPercentage: 60
+            }
+        });
+    </script>
 @endsection

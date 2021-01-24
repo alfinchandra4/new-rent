@@ -113,11 +113,11 @@
 @section('btn')
 
     <div>
-        <a href="{{ route('order.create.customer') }}" class="btn w-sm mb-1 bg-primary-lt">
+        <a href="#" class="btn w-sm mb-1 bg-primary-lt" data-toggle="modal" data-target="#modal">
             <i class="fa fa-plus-circle" aria-hidden="true"></i>
             <span class="d-none d-sm-inline mx-1">Buat jadwal</span>
         </a>
-        <a href="{{ route('order.create.customer') }}" class="btn mb-1 bg-primary-lt">
+        <a href="{{ route('order.ongoing.comingsoon') }}" class="btn mb-1 bg-primary-lt">
             <i class="fa fa-clipboard" aria-hidden="true"></i>
             <span class="d-none d-sm-inline mx-1">Lihat jadwal</span>
 
@@ -129,5 +129,61 @@
             <span class="d-none d-sm-inline mx-1">Selanjutnya</span>
             <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </a>
+    </div>
+@endsection
+
+@section('modal')
+    <div id="modal" class="modal fade" data-backdrop="true">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header ">
+                    <div class="modal-title text-md">Buat penjadwalan</div>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('order.scheduling') }}" method="post" id="createScheduleFrm">
+                        @csrf
+                        <div class="form-group">
+                            <label for="date">Tanggal pengiriman</label>
+                            <input type="date" name="order_date" id="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category_id">Pilih alat</label>
+                            <select name="category_id" id="category_id" class="form-control">
+                                @php
+                                $productCategories = App\Models\Category::all();
+                                @endphp
+                                @foreach ($productCategories as $cat)
+                                    <option value="{{ $cat->id }}">{{ $cat->cat_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cust">Customer</label>
+                            <input type="text" name="customer" id="cust" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="number" name="phone" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" name="company" id="company" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea name="shipping_address" id="address" cols="10" rows="2" class="form-control"
+                                required>Jl. Raya Cisauk-Legok No.66, RT.1/RW.3, Sampora, Kec. Cisauk, Tangerang, Banten 15341</textarea>
+                            <small class="text-muted">Alamat pengiriman barang</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="createScheduleFrm">Buat jadwal</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
     </div>
 @endsection

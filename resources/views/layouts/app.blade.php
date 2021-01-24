@@ -15,11 +15,25 @@
     <Link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" />
     <Link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" />
 
+    <strong><script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script></strong>
+        <script>
+            tinymce.init({
+                selector: "#mytextarea",
+                plugins: 'lists',
+                toolbar: 'undo redo | bold italic underline | numlist bullist | styleselect',
+                menubar:false,
+                branding: false
+            });
+        </script>
+        <style>
+            .mce-notification {display: none !important;}
+        </style>
+
     @yield('css-top')
 
 </head>
 
-<body class="layout-row">
+<body class="layout-row" style="font-family: 'Nunito Sans', sans-serif;">
     <!-- ############ Aside START-->
     <div id="aside" class="page-sidenav no-shrink bg-light nav-dropdown fade" aria-hidden="true">
         <div class="sidenav h-100 bg-light modal-dialog">
@@ -135,6 +149,7 @@
     <!-- endbuild -->
     <!-- Font Awesome -->
     <script src="https://use.fontawesome.com/d5e78ac528.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
     @yield('js-bottom')
 
@@ -146,7 +161,6 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
-
     </script>
 
 </body>

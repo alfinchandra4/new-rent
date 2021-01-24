@@ -92,7 +92,7 @@
 @section('btn')
     <div>
         <button type="submit" class="btn w-sm mb-1 bg-dark-lt" form="customerfrm">
-            <i class="fa fa-lg fa-clipboard    "></i>
+            <i class="fa fa-lg fa-clipboard"></i>
             <span class="d-none d-sm-inline mx-1">Buat pesanan</span>
         </button>
     </div>

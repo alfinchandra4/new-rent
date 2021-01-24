@@ -21,6 +21,7 @@ class CreateOrderDetailsTable extends Migration
             $table->date('date_end')->nullable();
             $table->char('detail_status'); //1 on the way, 2 on waorking, 3 returned
             $table->char('paid')->nullable();
+            $table->char('working_hours')->nullable();
             $table->timestamps();
         });
     }

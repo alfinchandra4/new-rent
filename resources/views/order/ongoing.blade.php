@@ -34,11 +34,11 @@
                 <thead class="bg-primary">
                     <tr>
                         <th>#</th>
-                        <th>Order date</th>
+                        <th>Rent date</th>
                         <th>Product</th>
                         <th>Customer</th>
                         <th>Phone</th>
-                        <th>Address</th>
+                        <th colspan="">Address</th>
                         <Th></Th>
                     </tr>
                 </thead>

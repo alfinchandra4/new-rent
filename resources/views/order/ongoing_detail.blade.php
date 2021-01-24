@@ -154,12 +154,12 @@
         for (let index = 0; index < tbody.children.length; index++) {
             tbody.children[index].cells[5].addEventListener('click', function() {
                 let order_detail_id = this.dataset.item_id;
+                rent_date = tbody.children[index].cells[1].textContent;
                 document.getElementById('returnedFrm').action = "{{ route('order.ongoing.returned') }}"
                 document.getElementById('order_detail_id').value = order_detail_id;
+                document.querySelector('.rent_date').innerHTML = rent_date;
             });
-
         }
-
     </script>
 @endsection
 
@@ -172,17 +172,27 @@
                     <button class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Tanggal selesai</label>
-                        <div class="col-sm-8">
-                            <form method="post" action="{{ route('order.ongoing.returned') }}" id="returnedFrm">
+                    <form method="post" action="{{ route('order.ongoing.returned') }}" id="returnedFrm">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Tanggal selesai</label>
+                            <div class="col-sm-8">
                                 @csrf
                                 <input type="hidden" name="order_id" value="{{ $order->id }}">
                                 <input type="hidden" name="order_detail_id" id="order_detail_id">
-                                <input type="date" class="form-control" name="date_end">
-                            </form>
+                                <input type="date" class="form-control" name="date_end" required>
+                                <small class="text-muted">
+                                    Tanggal pakai: <span class="rent_date font-weight-bold"></span>
+                                </small>
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Lama pemakaian</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="working_hours" required>
+                                <small class="text-muted">Dalam hari</small>
+                            </div>
+                        </div> 
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

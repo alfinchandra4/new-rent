@@ -3,9 +3,7 @@
 @section('page-title', 'Buat pesanan')
 @section('content-title', 'Daftar alat')
 
-@section('path')
-    Daftar alat
-@endsection
+@section('path', 'Daftar alat')
 
 @section('btn')
 
@@ -88,12 +86,12 @@
                 <thead class="bg-primary">
                     <tr>
                         <th>#</th>
-                        <th>Alat</th>
                         <th>No Seri</th>
+                        <th>Alat</th>
+                        <th>Last Services</th>
                         <th>Status</th>
                         <th>Kategori</th>
-                        <th>Histori</th>
-                        <th>Opsi</th>
+                        <th colspan="2"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,8 +101,9 @@
                     @foreach ($products as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->product_name }}</td>
                             <td>{{ $item->product_code }}</td>
+                            <td>{{ $item->product_name }}</td>
+                            <td>DATE</td>
                             <td>
                                 @switch($item->product_status)
                                     @case(1)
@@ -130,11 +129,13 @@
                                 </a>
                             </td>
                             <td>
-                                <i class="fa fa-gear" aria-hidden="true"></i> Under Construction
+                                <a href="{{ route('products.history', $item->id) }}" class="btn btn-outline-default bnt-sm">
+                                    History
+                                </a>
                             </td>
                             <td>
-                                <a href="{{ route('product.delete', $item->id) }}">
-                                    <i class="fa fa-trash" aria-hidden="true"></i> Remove
+                                <a href="{{ route('product.delete', $item->id) }}" class="btn btn-outline-default bnt-sm">
+                                    Remove
                                 </a>
                             </td>
                         </tr>

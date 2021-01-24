@@ -105,6 +105,7 @@ class OrderController extends Controller
         $data = OrderDetail::find($request->order_detail_id);
         $data->detail_status = 3;
         $data->date_end = $request->date_end;
+        $data->working_hours = $request->working_hours * 8;
         $data->update();
 
         $product_code = $data->product_code;
